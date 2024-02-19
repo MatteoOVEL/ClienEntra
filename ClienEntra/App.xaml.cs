@@ -1,4 +1,6 @@
-﻿using ClienEntra.Views;
+﻿using ClienEntra.ViewModels;
+using ClienEntra.Views;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -30,16 +32,24 @@ namespace ClienEntra
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
+         public static FrameworkElement MainRoot { get; private set; }
+        public ServiceProvider Services { get; }
         public App()
         {
             this.InitializeComponent();
+
+            ServiceCollection services = new ServiceCollection();
+            services.AddTransient<AjoutMusiqueViewModel>();
+            Services = services.BuildServiceProvider();
         }
 
+      
         /// <summary>
         /// Invoked when the application is launched.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
+        public new static App Current => (App)Application.Current;
+
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
             m_window = new MainWindow();
@@ -50,6 +60,8 @@ namespace ClienEntra
             m_window.Activate();
 
             rootFrame.Navigate(typeof(AjoutMusiquePage));
+            MainRoot = m_window.Content as FrameworkElement;
+
         }
 
         private Window m_window;

@@ -10,5 +10,17 @@ namespace ClienEntra.Models
     {
         public int Idchanteur { get; set; }
         public string Nomchanteur { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Chanteur chanteur &&
+                   Idchanteur == chanteur.Idchanteur &&
+                   Nomchanteur == chanteur.Nomchanteur;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Idchanteur, Nomchanteur);
+        }
     }
 }

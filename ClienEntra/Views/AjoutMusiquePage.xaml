@@ -65,6 +65,8 @@
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             HorizontalAlignment="Center"
             RelativePanel.Below ="lblTitreMus"
+            Text="{Binding Musique.Titre ,Mode=TwoWay}"
+
             />
 
 
@@ -75,6 +77,7 @@
             HorizontalAlignment="Center"
             RelativePanel.Below ="tbTitreMus"
             Text="Ajouter genre"
+            
             />
 
         <TextBox
@@ -83,6 +86,8 @@
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             HorizontalAlignment="Center"
             RelativePanel.Below ="lblGenre"
+            Text="{Binding Musique.Genre ,Mode=TwoWay}"
+
             />
 
         <TextBlock
@@ -100,8 +105,12 @@
             RelativePanel.AlignHorizontalCenterWithPanel="True"
             HorizontalAlignment="Center"
             RelativePanel.Below ="lblChanteur"
+            ItemsSource="{Binding Chanteur, Mode=TwoWay}"
+            DisplayMemberPath="Nomchanteur"
+            SelectedItem="{Binding ChanteurSelectionnee, Mode=TwoWay}"
             
-            />
+            
+            ></ComboBox>
 
         <Button
             x:Name="btAjout"
@@ -110,6 +119,7 @@
             HorizontalAlignment="Center"
             RelativePanel.Below ="cbChanteur"
             Content="Ajouter musique"
+            Command="{Binding BtnSearch}"
             />
 
     </RelativePanel>
